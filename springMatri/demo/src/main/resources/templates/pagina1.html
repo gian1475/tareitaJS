@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container col-sm-6">
+    <h2>Especialidadesx Curso</h2>
+   <div class="mt-5">
+    <form action="/especial" method="get">
+
+        <label>Espeialidad:</label>
+        <select name="codesp" onchange="this.form.submit()">
+        <option>--seleccione--</option>
+        <option th:each="p : ${lisesp}"
+            th:value="${p.code}"
+            th:text="${p.nomes}"
+            th:selected="${p.code.equals(elegido)}"
+       
+        >
+        </option>
+        </select>
+    </form>
+</div>
+<hr>
+<table class="table table-hover">
+ <thead class="table-dark">  
+<tr>
+    <th>Codigo</th>
+    <th>nombre</th>
+    <th>costo</th>
+    <th>vacantes</th>
+    <th>alumnos</th>
+    
+    </tr>
+    </thead>
+<tbody>
+<tr th:each="c : ${cursos}">
+<td th:text="${c.codcur}"></td>
+<td th:text="${c.nomcur}"></td>
+<td th:text="${c.costo}"></td>
+<td th:text="${c.nrovac}"></td>
+<td>
+    <a th:href="@{/alumnos/{id}(id=${c.codcur})}" class="btn btn-success">Ver alumnos</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+
+</body>
+</html>

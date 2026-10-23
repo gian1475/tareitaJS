@@ -1,0 +1,90 @@
+<h1>Matrícula de Alumnos</h1>
+
+@if (mensaje(); as m) {
+  <div class="mensaje" [class.ok]="m.ok" [class.error]="!m.ok">{{ m.mensaje }}</div>
+}
+
+<div class="tarjeta">
+  <div class="form-grid">
+    <label for="nromat">Nro de matrícula</label>
+    <input id="nromat" type="text" [value]="nromat()" readonly />
+
+    <label for="apenom">Nombres y Apellidos</label>
+    <input
+      id="apenom"
+      type="text"
+      maxlength="25"
+      [value]="apenom()"
+      (input)="apenom.set($any($event.target).value)"
+    />
+
+    <label>Tipo de Alumno</label>
+    <div class="radios">
+      @for (t of tipos; track t.valor) {
+        <label>
+          <input
+            type="radio"
+            name="tipo"
+            [value]="t.valor"
+            [checked]="tipo() === t.valor"
+            (change)="tipo.set(t.valor)"
+          />
+          {{ t.texto }}
+        </label>
+      }
+    </div>
+
+    <label for="pago">Pago</label>
+    <input id="pago" type="text" [value]="pago()" readonly />
+  </div>
+
+  <div class="acciones">
+    <button class="btn primario" (click)="grabar()" [disabled]="guardando() || curso()?.nrovac === 0">
+      Grabar Reg
+    </button>
+    <button class="btn" (click)="nuevo()">Nuevo</button>
+    <a class="btn" routerLink="/cursos" [queryParams]="{ esp: curso()?.codes }">Retornar</a>
+  </div>
+</div>
+
+@if (curso(); as c) {
+  <p class="info-curso">
+    Lista de Alumnos del Curso <strong>{{ c.nomcur }}</strong> &nbsp; Costo <strong>{{ c.costo }}</strong>
+    &nbsp; Vacantes <strong>{{ c.nrovac }}</strong>
+  </p>
+}
+
+<div class="tarjeta tabla-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>Nro Matrícula</th>
+        <th>Nombre y Apellido</th>
+        <th>Tipo</th>
+        <th class="num">Pago</th>
+        <th class="centro">Anular</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (a of alumnosPagina(); track a.nromat) {
+        <tr>
+          <td>{{ a.nromat }}</td>
+          <td>{{ a.apenom }}</td>
+          <td>{{ a.ctipo }}</td>
+          <td class="num">{{ a.pago }}</td>
+          <td class="centro"><button class="link peligro" (click)="eliminar(a)">Elimina</button></td>
+        </tr>
+      } @empty {
+        <tr><td colspan="5" class="vacio">Este curso aún no tiene alumnos</td></tr>
+      }
+    </tbody>
+  </table>
+
+  @if (totalPaginas() > 1) {
+    <div class="paginas">
+      @for (p of paginas(); track p) {
+        <button [class.actual]="p === pagina()" (click)="pagina.set(p)">{{ p }}</button>
+      }
+    </div>
+  }
+</div>

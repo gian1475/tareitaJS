@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Consultar DNI (Reniec)</h2>
+
+<form action="/reniec/buscar" method="post">
+    <label>DNI:</label>
+    <input type="text" name="dni" placeholder="Ingrese DNI" required>
+    <button type="submit">Buscar</button>
+</form>
+
+<hr>
+
+<!-- Mostrar Error -->
+<div th:if="${error}">
+    <p style="color:red;" th:text="${error}"></p>
+</div>
+
+<!-- Mostrar datos si existen -->
+<div th:if="${nombres}">
+    <h3>Datos Encontrados:</h3>
+    <p><strong>DNI:</strong> <span th:text="${dni}"></span></p>
+    <p><strong>Nombres:</strong> <span th:text="${nombres}"></span></p>
+    <p><strong>Apellido Paterno:</strong> <span th:text="${apePat}"></span></p>
+    <p><strong>Apellido Materno:</strong> <span th:text="${apeMat}"></span></p>
+</div>
+</body>
+</html>

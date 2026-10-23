@@ -1,0 +1,131 @@
+{
+  "info": {
+    "name": "Matricula API",
+    "description": "Pruebas del backend Spring Boot (puerto 8086). Ejecutar en orden.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 - Listar especialidades",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8086/api/v1/especialidades",
+        "description": "Devuelve las 6 especialidades: code y nomes."
+      }
+    },
+    {
+      "name": "02 - Cursos de la especialidad 01",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8086/api/v1/cursos/01",
+        "description": "Punto 1. Devuelve 6 cursos (C001 a C006) con costo y vacantes."
+      }
+    },
+    {
+      "name": "03 - Ver un curso (C001)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8086/api/v1/curso/C001",
+        "description": "Java, costo 850, 10 vacantes."
+      }
+    },
+    {
+      "name": "04 - Alumnos del curso C001",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8086/api/v1/alumnos/C001",
+        "description": "Punto 2. Solo los alumnos del curso C001 (7 alumnos)."
+      }
+    },
+    {
+      "name": "05 - Siguiente nro de matricula",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8086/api/v1/siguiente",
+        "description": "Codigo que se generara al grabar: 000051."
+      }
+    },
+    {
+      "name": "06 - Matricular alumno (stored procedure)",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:8086/api/v1/adiciona",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codcur\": \"C001\",\n  \"apenom\": \"Perez Lopez Juan\",\n  \"tipo\": \"1\",\n  \"pago\": 425\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "description": "Llama a spadicion. Tipo 1 = 1/2 Beca: 850 x 0.5 = 425. Luego repetir 03 (vacantes bajan a 9) y 04 (aparece 000051)."
+      }
+    },
+    {
+      "name": "07 - Anular matricula 000051 (stored procedure)",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:8086/api/v1/borra/000051",
+        "description": "Llama a spanula. Borra al alumno y las vacantes de C001 vuelven a 10."
+      }
+    },
+    {
+      "name": "08 - Reporte alumnos por curso (esp 01)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8086/api/v1/reporte/01",
+        "description": "Punto 3. C001 tiene 7 alumnos = Iniciar, los demas = No inicia."
+      }
+    },
+    {
+      "name": "09 - Listar todos los cursos",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8086/api/v1/curso",
+        "description": "Punto 4. Devuelve los 20 cursos."
+      }
+    },
+    {
+      "name": "10 - Registrar curso C021",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:8086/api/v1/curso",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codcur\": \"C021\",\n  \"codes\": \"02\",\n  \"nomcur\": \"Angular\",\n  \"costo\": 550,\n  \"nrovac\": 15\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "description": "Punto 4. Si se envia otra vez responde ok:false (codigo repetido)."
+      }
+    },
+    {
+      "name": "11 - Editar curso C021",
+      "request": {
+        "method": "PUT",
+        "url": "http://localhost:8086/api/v1/curso/C021",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codes\": \"02\",\n  \"nomcur\": \"Angular Pro\",\n  \"costo\": 600,\n  \"nrovac\": 20\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "description": "Punto 4. Cambia nombre, costo y vacantes."
+      }
+    },
+    {
+      "name": "12 - Eliminar curso C021",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:8086/api/v1/curso/C021",
+        "description": "Punto 4. Lo elimina porque no tiene alumnos."
+      }
+    },
+    {
+      "name": "13 - Eliminar curso C001 (debe fallar)",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:8086/api/v1/curso/C001",
+        "description": "Responde ok:false porque C001 tiene alumnos matriculados."
+      }
+    }
+  ]
+}

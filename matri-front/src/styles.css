@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  background: #f5f1e6; /* color hueso */
+  color: #222;
+}
+
+/* menu principal */
+.menu {
+  background: #111;
+  padding: 10px 16px;
+}
+.menu b { color: #fff; margin-right: 20px; }
+.menu a {
+  color: #ccc;
+  text-decoration: none;
+  margin-right: 16px;
+  display: inline-block;
+  padding: 4px 0;
+}
+.menu a:hover, .menu a.activo { color: #fff; text-decoration: underline; }
+
+.contenido { max-width: 850px; margin: 0 auto; padding: 16px; }
+
+h1 { text-align: center; font-size: 24px; }
+h2 { font-size: 16px; margin-top: 0; }
+
+.tarjeta { margin-bottom: 16px; }
+.tabla-scroll { overflow-x: auto; }
+
+.filtro { text-align: center; margin-bottom: 16px; font-weight: bold; }
+.filtro select { margin-left: 6px; }
+
+select, input[type='text'], input[type='number'] {
+  padding: 4px;
+  border: 1px solid #999;
+  font: inherit;
+  max-width: 100%;
+}
+input[readonly] { background: #e9e6dd; }
+
+/* tablas */
+table { width: 100%; border-collapse: collapse; background: #fff; }
+th, td { border: 1px solid #aaa; padding: 5px 8px; text-align: left; }
+th { background: #ddd; }
+.num { text-align: right; }
+.centro { text-align: center; }
+.vacio { text-align: center; color: #777; }
+
+a.link, button.link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #0645ad;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn {
+  padding: 4px 12px;
+  font: inherit;
+  color: #222;
+  background: #eee;
+  border: 1px solid #888;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.btn:disabled { color: #999; cursor: not-allowed; }
+
+/* formularios */
+.form-grid { display: grid; grid-template-columns: 170px 1fr; gap: 8px; align-items: center; max-width: 550px; }
+.form-grid label { font-weight: bold; }
+.radios label { font-weight: normal; margin-right: 12px; }
+.acciones { margin-top: 12px; }
+.acciones .btn { margin-right: 6px; }
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+.mensaje { padding: 6px 10px; margin-bottom: 12px; border: 1px solid; }
+.mensaje.ok { color: green; background: #eaf7ea; }
+.mensaje.error { color: #b00; background: #fbeaea; }
+
+/* reporte */
+.estado { font-weight: bold; }
+.estado.inicia { color: green; }
+.estado.no-inicia { color: red; }
+
+/* paginacion 1 2 3 */
+.paginas { text-align: center; margin-top: 8px; }
+.paginas button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: #0645ad;
+  text-decoration: underline;
+  cursor: pointer;
+  margin: 0 3px;
+}
+.paginas button.actual { color: #222; font-weight: bold; text-decoration: none; }
+
+.info-curso { margin: 4px 0 8px; }

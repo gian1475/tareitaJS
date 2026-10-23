@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container col-sm-6">
+    <h3>Curso :<span th:text="${curso.nomcur}"></span>  Costo :<span th:text="${curso.costo}"></span></h3>
+    <h3>Registrar nuevo alumno</h3>
+<br>
+
+    <a th:href="@{/especial}">Retornar al inicio</a>
+<form th:action="@{/adiciona}" th:object="${alumno}" method="post">
+    <input type="hidden" th:field="*{codcur}"  />
+    <div class="form-group mb-3">
+    <label>Apellidos y Nombres:</label>
+    <input type="text" th:field="*{apenom}"  class="form-control"/>
+    </div>
+    <div class="form-group mb-3">
+    
+    <label>Tipo:</label>
+    <select th:field="*{tipo}" id="tipoSelect" onchange="calcularPago()" class="form-control">
+        <option value="">--seleccione--</option>
+        <option value="3">Regular</option>
+        <option value="1">1/2 Beca</option>
+        <option value="2">1/4 Beca</option>
+    </select><br/>
+    </div>
+    <div class="form-group mb-3">
+        <label>Pago:</label>
+    <input type="number" step="0.01" th:field="*{pago}" id="pagoInput" readonly class="form-control"/>
+     </div>
+     <div class="form-group mb-3">
+       <button type="submit" class="form-control btn btn-success">Guardar</button>
+    </div>
+
+    </form>
+<div th:if="${mensaje}" class="alert alert-info">
+    <span th:text="${mensaje}"></span>
+</div>
+
+<table class="table table-hover" >
+    <thead class="table-dark">  
+<tr>
+    <th>Codigo</th>
+    <th>nombre</th>
+    <th>tipo</th>
+    <th>Pago</th>
+    <th>Accion</th>
+    
+    </tr>
+    </thead>
+<tbody>
+<tr th:each="c : ${listaAlumnos}">
+<td th:text="${c.nromat}"></td>
+<td th:text="${c.apenom}"></td>
+<td th:text="${c.ctipo}"></td>
+<td th:text="${c.pago}"></td>
+
+<td>
+        <a th:href="@{'/borra/' + ${c.nromat}}"
+           onclick="return confirm('¿Seguro de eliminar este alumno?');" class="btn btn-danger">
+            Borrar
+        </a>
+    </td>
+</tr>
+
+</tbody>
+
+</table>
+
+
+</div>
+<script th:inline="javascript">
+    function calcularPago() {
+ const costo = /*[[${curso.costo}]]*/ 0;
+
+  console.log("su costo:"+costo);
+    console.log("Tipo seleccionado:", document.getElementById("tipoSelect").value);
+    const tipo = document.getElementById("tipoSelect").value;
+    let pago = costo;
+
+    if (tipo === "1") {
+        pago = costo * 0.5;
+    } else if (tipo === "2") {  // Aquí también ten cuidado con el valor "C2", que debería ser "2"
+        pago = costo * 0.75;
+    } else {
+        pago = costo; // Regular sin descuento
+    }
+    console.log("su pago:"+pago);
+
+    document.getElementById("pagoInput").value = pago.toFixed(2);
+}
+</script>
+</body>
+</html>

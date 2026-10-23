@@ -1,0 +1,44 @@
+<h1>Alumnos por Curso</h1>
+
+<div class="filtro">
+  <label for="esp">Seleccione Especialidad</label>
+  <select id="esp" (change)="cambiarEspecialidad($any($event.target).value)">
+    <option value="">-- Seleccione --</option>
+    @for (e of especialidades(); track e.code) {
+      <option [value]="e.code">{{ e.nomes }}</option>
+    }
+  </select>
+</div>
+
+<div class="tarjeta tabla-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Curso</th>
+        <th class="num"># Alumnos</th>
+        <th class="centro">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (f of filas(); track f.codcur) {
+        <tr>
+          <td>{{ f.codcur }}</td>
+          <td>{{ f.nomcur }}</td>
+          <td class="num">{{ f.cantidad }}</td>
+          <td class="centro">
+            <span class="estado" [class.inicia]="f.estado === 'Iniciar'" [class.no-inicia]="f.estado !== 'Iniciar'">
+              {{ f.estado }}
+            </span>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="4" class="vacio">
+            {{ elegida() ? 'Esta especialidad no tiene cursos' : 'Seleccione una especialidad' }}
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

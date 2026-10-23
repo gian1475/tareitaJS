@@ -1,0 +1,46 @@
+<h1>Cursos de Extensión</h1>
+
+@if (error()) {
+  <div class="mensaje error">{{ error() }}</div>
+}
+
+<div class="filtro">
+  <label for="esp">Seleccione Especialidad</label>
+  <select id="esp" [value]="elegida()" (change)="cambiarEspecialidad($any($event.target).value)">
+    <option value="">-- Seleccione --</option>
+    @for (e of especialidades(); track e.code) {
+      <option [value]="e.code" [selected]="e.code === elegida()">{{ e.nomes }}</option>
+    }
+  </select>
+</div>
+
+<div class="tarjeta tabla-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Asignatura</th>
+        <th class="num">Costo</th>
+        <th class="num">Vacantes</th>
+        <th class="centro">Matrícula</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (c of cursos(); track c.codcur) {
+        <tr>
+          <td>{{ c.codcur }}</td>
+          <td>{{ c.nomcur }}</td>
+          <td class="num">{{ c.costo }}</td>
+          <td class="num">{{ c.nrovac }}</td>
+          <td class="centro"><a class="link" [routerLink]="['/matricula', c.codcur]">Alumnos</a></td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="vacio">
+            {{ elegida() ? 'Esta especialidad no tiene cursos' : 'Seleccione una especialidad' }}
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
