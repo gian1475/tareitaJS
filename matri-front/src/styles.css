@@ -84,6 +84,7 @@ a.link, button.link {
 .mensaje { padding: 6px 10px; margin-bottom: 12px; border: 1px solid; }
 .mensaje.ok { color: green; background: #eaf7ea; }
 .mensaje.error { color: #b00; background: #fbeaea; }
+.mensaje.aviso { color: #7a5200; background: #fff6dc; }
 
 /* reporte */
 .estado { font-weight: bold; }

@@ -6,5 +6,11 @@
 </div>
 
 <div class="contenido">
+  @if (lento()) {
+    <div class="mensaje aviso">
+      Conectando con el servidor... La primera carga puede tardar hasta 1 minuto porque el servidor
+      gratuito se apaga cuando nadie lo usa. Los datos aparecerán solos, no es necesario recargar.
+    </div>
+  }
   <router-outlet />
 </div>
