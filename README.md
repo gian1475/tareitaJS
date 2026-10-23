@@ -1,4 +1,4 @@
-# Práctica 3 – Matrícula de Cursos de Extensión
+# Tarea – Matrícula de Cursos de Extensión
 
 Sistema de matrícula de alumnos en cursos de extensión: Angular (frontend), Spring Boot (backend) y MySQL (base de datos), publicado en la nube con servicios gratuitos.
 
@@ -22,7 +22,7 @@ Resumen:
 2. **Backend:** Render → Web Service con Docker, carpeta raíz `springMatri/demo`, con las variables `DB_URL`, `DB_USER`, `DB_PASSWORD` y `CORS_ORIGINS`.
 3. **Frontend:** Render → Static Site, carpeta raíz `matri-front`, build `npm ci && npm run build`, publicación `dist/matri-front/browser` y la regla Rewrite `/*` → `/index.html`.
 
-## Puntos de la práctica
+## Puntos de la tarea
 
 | Punto | Dónde está |
 |---|---|
