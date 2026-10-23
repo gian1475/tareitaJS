@@ -1,4 +1,4 @@
-// produccion (Render): se cambia por la URL del backend cuando lo subamos
+// produccion (Render)
 export const environment = {
-  apiUrl: 'http://localhost:8086/api/v1',
+  apiUrl: 'https://matricula-back.onrender.com/api/v1',
 };
